@@ -1,0 +1,20 @@
+.collection-item {
+    min-height: 10vh;
+    overflow: auto;
+}
+
+.username {
+    text-align: left;
+    float: left;
+}
+
+.message-content {
+    text-align: left;
+    float: left;
+    padding-left: 10%;
+    overflow: auto;
+}
+
+.message-date{
+    float: right;
+}

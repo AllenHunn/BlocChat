@@ -8,12 +8,19 @@ class Rooms extends React.Component {
         this.roomsRef = this.props.firebase.database().ref('rooms');
     }
 
+    renderCollectionItem(room, rowID) {
+        if(rowID%2 === 0) {
+            return (<CollectionItem key={room.key} style={{backgroundColor: 'antiquewhite'}}>{room.name}</CollectionItem>);
+        }
+        return (<CollectionItem key={room.key} style={{backgroundColor: 'burlywood'}}>{room.name}</CollectionItem>);
+    }
+
     render() {
         return( 
             <Collection>
             {
-                this.state.rooms.map((room) =>
-                    <CollectionItem href={room.key} key={room.key}>{room.name}</CollectionItem>
+                this.state.rooms.map((room, index) =>
+                    this.renderCollectionItem(room, index)
                 )
             }
             </Collection>

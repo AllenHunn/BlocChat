@@ -22,6 +22,14 @@
   font-size: large;
 }
 
+.collection .collection-item{
+  color: black;
+}
+
+.row .col.s10 {
+  margin-left: 16%;
+}
+
 .Nav-bar {
   background-color: gray;
   margin: 0;
