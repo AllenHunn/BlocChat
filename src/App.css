@@ -24,6 +24,11 @@
 
 .Nav-bar {
   background-color: gray;
+  margin: 0;
+  padding: 0;
+  position: fixed;
+  height: 100%;
+  overflow: auto;
 }
 
 @keyframes App-logo-spin {

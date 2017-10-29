@@ -21,6 +21,7 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
+          <img src="logo.png" />
           <h1 className="App-title">Bloc-Chat -- BLOC IT OUT!</h1>
         </header>
         <div>
