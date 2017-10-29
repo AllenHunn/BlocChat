@@ -13,7 +13,7 @@ class Rooms extends React.Component {
             <Collection>
             {
                 this.state.rooms.map((room) =>
-                    <CollectionItem href={room.key}>{room.name}</CollectionItem>
+                    <CollectionItem href={room.key} key={room.key}>{room.name}</CollectionItem>
                 )
             }
             </Collection>

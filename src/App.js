@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Col, Row } from 'react-materialize';
 import * as firebase from 'firebase';
 import Rooms from './components/Rooms/Rooms';
+import NewRoom from './components/Rooms/NewRoom';
 import logo from './logo.svg';
 import './App.css';
 
@@ -22,14 +23,15 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           <img src="logo.png" />
-          <h1 className="App-title">Bloc-Chat -- BLOC IT OUT!</h1>
+          <h1 className="App-title">Bloc Chat -- BLOC IT OUT!</h1>
         </header>
         <div>
           <Row>
-            <Col s='3' className='Nav-bar'>
-              <Rooms firebase={firebase}/>
+            <Col s={3} className='Nav-bar'>
+              <NewRoom firebase={firebase} />
+              <Rooms firebase={firebase} />
             </Col>
-            <Col s='9'>
+            <Col s={9}>
               Placeholder
             </Col>
           </Row>
