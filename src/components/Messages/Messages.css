@@ -6,15 +6,16 @@
 .username {
     text-align: left;
     float: left;
+    width: 10%;
 }
 
 .message-content {
-    text-align: left;
-    float: left;
     padding-left: 10%;
     overflow: auto;
+    max-width: 72%;
 }
 
 .message-date{
     float: right;
+    font-weight: bold;
 }

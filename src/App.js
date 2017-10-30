@@ -19,6 +19,16 @@ var config = {
 firebase.initializeApp(config);
 
 class App extends Component {
+  constructor(){
+      super();
+      this.state = { activeRoom: null };
+      this.changeRoom = this.changeRoom.bind(this);
+  }
+
+  changeRoom(room) {
+    this.setState({ activeRoom: room });
+  }
+
   render() {
     return (
       <div className="App">
@@ -28,12 +38,12 @@ class App extends Component {
         </header>
         <div>
           <Row className="App-row">
-            <Col s={2} className='Nav-bar'>
-              <NewRoom firebase={firebase} />
-              <Rooms firebase={firebase} />
+            <Col s={2} l={1} className='Nav-bar'>
+              <NewRoom  firebase={firebase} />
+              <Rooms firebase={firebase} changeRoomEvent={this.changeRoom} activeRoom={this.activeRoom} />
             </Col>
-            <Col s={10}>
-              <Messages firebase={firebase} />
+            <Col s={10} l={11}>
+              <Messages firebase={firebase} room={this.state.activeRoom} />
             </Col>
           </Row>
         </div>

@@ -6,13 +6,25 @@ class Rooms extends React.Component {
         super(props);
         this.state = { rooms: [] };
         this.roomsRef = this.props.firebase.database().ref('rooms');
+        this.changeRoom = this.changeRoom.bind(this);
+    }
+
+    changeRoom(e){
+        e.preventDefault();
+        this.props.changeRoomEvent(this.state.rooms[e.target.id]);
     }
 
     renderCollectionItem(room, rowID) {
-        if(rowID%2 === 0) {
-            return (<CollectionItem key={room.key} style={{backgroundColor: 'antiquewhite'}}>{room.name}</CollectionItem>);
-        }
-        return (<CollectionItem key={room.key} style={{backgroundColor: 'burlywood'}}>{room.name}</CollectionItem>);
+        return (<CollectionItem key={room.key} id={rowID} active={this.getIsActive(room)} onClick={this.changeRoom} style={{ backgroundColor: this.getBackgroundColor(rowID) }}>{room.name}</CollectionItem>);
+    }
+
+    getIsActive(room){
+        console.log(this.props.activeRoom && room.key === this.props.activeRoom.key);
+        return this.props.activeRoom && room.key === this.props.activeRoom.key;
+    }
+
+    getBackgroundColor(rowID){
+        return (rowID%2 === 0) ? 'antiquewhite' : 'burlywood';
     }
 
     render() {
