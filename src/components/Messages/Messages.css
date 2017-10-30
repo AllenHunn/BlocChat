@@ -19,3 +19,15 @@
     float: right;
     font-weight: bold;
 }
+
+.footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+
+.Messages{
+    height: 60vh;
+    overflow: auto;
+}

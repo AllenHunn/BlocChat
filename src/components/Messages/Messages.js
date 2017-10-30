@@ -1,6 +1,8 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import { Collection, CollectionItem } from 'react-materialize';
 import moment from 'moment';
+import NewMessage from './NewMessage';
 import './Messages.css';
 
 class Messages extends React.Component {
@@ -17,6 +19,11 @@ class Messages extends React.Component {
         return (rowID%2 !== 0) ? 'grey' : 'lightgrey';
     }
 
+    scrollToBottom = () => {
+        const node = ReactDOM.findDOMNode(this.messagesEnd);
+        node && node.scrollIntoView({ behavior: "smooth" });
+    }      
+
     renderMessageText(msg){
         return(
             <span>
@@ -28,37 +35,47 @@ class Messages extends React.Component {
     }
 
     render() {
+        if (!this.props.room)
+            return ("");
         return (
-            <Collection>
-                {
-                    this.state.messages.map((msg, index) =>
-                        this.renderCollectionItem(msg, index)
-                    )
-                }
-            </Collection>
+            <div>
+                    <Collection className='Messages'>
+                        {
+                            this.state.messages.map((msg, index) =>
+                                this.renderCollectionItem(msg, index)
+                            )
+                        }
+                        <div style={{ float:"left", clear: "both" }} ref={(el) => { this.messagesEnd = el; }}></div>
+                    </Collection>
+                <NewMessage messages={this.state.messagesRef} user={this.props.user} />
+            </div>
         );
     }
 
-    componentDidMount() {
-
-    }
-
     componentWillReceiveProps(nextProps){
+        if (!nextProps.room)
+            return;
+
         if (this.props.room){
             if (this.props.room.key === nextProps.room.key){
                 return;
             }
             else
             {
-                this.messagesRef.off('child_added');                
+                this.state.messagesRef.off('child_added');                
             }
         }
-        this.setState({messages: []});
-        this.messagesRef = this.props.firebase.database().ref('messages/' + nextProps.room.key).orderByChild('sentAt');
-        this.messagesRef.on('child_added', snapshot  => {
-            const message = Object.assign(snapshot.val(), {key: snapshot.key});
-            this.setState({ messages: this.state.messages.concat( message ) });
+        
+        this.setState({messages: [], messagesRef: this.props.firebase.database().ref('messages/' + nextProps.room.key)}, function(){
+            this.state.messagesRef.orderByChild('sentAt').on('child_added', snapshot  => {
+                const message = Object.assign(snapshot.val(), {key: snapshot.key});
+                this.setState({ messages: this.state.messages.concat( message ) });
+            });
         });
+    }
+
+    componentDidUpdate() {
+        this.scrollToBottom();
     }
 }
 

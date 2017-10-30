@@ -29,6 +29,13 @@
   margin-left: 8%;
 }
 
+.App-row{
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: auto;
+}
+
 .Nav-bar {
   background-color: gray;
   margin: 0;
@@ -36,4 +43,22 @@
   position: fixed;
   height: 100%;
   overflow: auto;
+}
+
+.Room-name{
+  position: absolute;
+  z-index: 2000;
+  width: 100%;
+  height: 10vh;
+}
+
+.Messages{
+  margin-top: 11vh;
+}
+
+.User-button{
+  float: right;
+  top: 0;
+  margin-left: 90%;
+  position: absolute;
 }

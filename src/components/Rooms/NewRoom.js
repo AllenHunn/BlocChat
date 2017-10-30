@@ -19,13 +19,17 @@ class NewRoom extends React.Component {
         this.setState({ newRoomName: e.target.value });
     }
 
-    render() {
-        return (
+    renderForm(){
+        return(            
             <form onSubmit={ (e) => this.handleSubmit(e) }>
                 <Input label="New Room" placeholder="Room Name" value={ this.state.newRoomName } onChange={ (e) => this.handleNameChange(e) } />
                 <input type="submit" />
             </form>
-        )
+        );
+    }
+
+    render() {
+        return this.renderForm();
     }
 }
 

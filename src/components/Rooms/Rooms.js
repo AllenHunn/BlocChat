@@ -19,12 +19,11 @@ class Rooms extends React.Component {
     }
 
     getIsActive(room){
-        console.log(this.props.activeRoom && room.key === this.props.activeRoom.key);
         return this.props.activeRoom && room.key === this.props.activeRoom.key;
     }
 
     getBackgroundColor(rowID){
-        return (rowID%2 === 0) ? 'antiquewhite' : 'burlywood';
+        return (rowID%2 === 0) ? 'darkgoldenrod' : 'burlywood';
     }
 
     render() {
